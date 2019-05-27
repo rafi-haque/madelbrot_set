@@ -40,17 +40,11 @@ if __name__ == '__main__':
     ax = fig.add_axes([0.0, 0.0, 1.0, 1.0], frameon=False, aspect=1)
 
     # Shaded rendering
-    light = colors.LightSource(azdeg=315, altdeg=10)
-    M = light.shade(M, cmap=plt.cm.hot, vert_exag=1.5,
-                    norm=colors.PowerNorm(0.3), blend_mode='hsv')
+    light = colors.LightSource(azdeg=315, altdeg=15)
+    M = light.shade(M, cmap=plt.cm.hot, vert_exag=5,
+                    norm=colors.PowerNorm(5), blend_mode='hsv')
     plt.imshow(M, extent=[xmin, xmax, ymin, ymax], interpolation="bicubic")
     ax.set_xticks([])
     ax.set_yticks([])
-
-    # Some advertisement for matplotlib
-    year = time.strftime("%Y")
-    major, minor, micro = matplotlib.__version__.split('.', 2)
-    text = "CopyRight: Rafi Haque"
-    ax.text(xmin+.025, ymin+.025, text, color="white", fontsize=12, alpha=0.5)
 
     plt.show()
