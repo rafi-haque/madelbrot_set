@@ -21,8 +21,8 @@ if __name__ == '__main__':
     from matplotlib import colors
     import matplotlib.pyplot as plt
 
-    xmin, xmax, xn = -2.25, +0.75, 3000/2
-    ymin, ymax, yn = -1.25, +1.25, 2500/2
+    xmin, xmax, xn = -2.25, +0.75, 6000/2
+    ymin, ymax, yn = -1.25, +1.25, 5000/2
     maxiter = 200
     horizon = 2.0 ** 40
     log_horizon = np.log(np.log(horizon))/np.log(2)
@@ -33,18 +33,24 @@ if __name__ == '__main__':
                           np.log(np.log(abs(Z)))/np.log(2) +
                           log_horizon)
 
-    dpi = 72
+    dpi = 96
     width = 10
     height = 10*yn/xn
-    fig = plt.figure(figsize=(width, height), dpi=dpi)
-    ax = fig.add_axes([0.0, 0.0, 1.0, 1.0], frameon=False, aspect=1)
 
-    # Shaded rendering
-    light = colors.LightSource(azdeg=315, altdeg=15)
-    M = light.shade(M, cmap=plt.cm.hot, vert_exag=5,
-                    norm=colors.PowerNorm(5), blend_mode='hsv')
-    plt.imshow(M, extent=[xmin, xmax, ymin, ymax], interpolation="bicubic")
-    ax.set_xticks([])
-    ax.set_yticks([])
+    for i in range(170, 180):
+        fig = plt.figure(figsize=(width, height), dpi=dpi*2)
+        ax = fig.add_axes([0.0, 0.0, 1.0, 1.0], frameon=False, aspect=1)
 
-    plt.show()
+        # Shaded rendering
+        light = colors.LightSource(azdeg=i, altdeg=20)
+        temp_M = light.shade(M, cmap=plt.cm.hot, vert_exag=10,
+                             norm=colors.PowerNorm(5), blend_mode='hsv')
+        plt.imshow(temp_M, extent=[xmin, xmax, ymin,
+                                   ymax], interpolation="bicubic")
+        ax.set_xticks([])
+        ax.set_yticks([])
+
+        # plt.show()
+        name = str(i)+".png"
+        print(name)
+        plt.savefig(name, bbox_inches='tight')
