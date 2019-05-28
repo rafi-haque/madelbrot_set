@@ -37,7 +37,7 @@ if __name__ == '__main__':
     width = 10
     height = 10*yn/xn
 
-    for i in range(170, 180):
+    for i in range(350, 360):
         fig = plt.figure(figsize=(width, height), dpi=dpi*2)
         ax = fig.add_axes([0.0, 0.0, 1.0, 1.0], frameon=False, aspect=1)
 
